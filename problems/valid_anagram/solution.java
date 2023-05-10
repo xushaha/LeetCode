@@ -1,18 +1,29 @@
 class Solution {
     public boolean isAnagram(String s, String t) {
+        
+       if (s == null || t == null) {
+            return false;
+        }
+
         if (s.length() != t.length()) {
             return false;
         }
 
-        char[] sArr = s.toCharArray();
-        char[] tArr = t.toCharArray();
+        int[] alphabet = new int[26];
 
-        Arrays.sort(sArr);
-        Arrays.sort(tArr);
+        for (int i = 0; i < s.length(); i++) {
+            alphabet[s.charAt(i) - 'a']++;
+            alphabet[t.charAt(i) - 'a']--;
+        }
 
-        String sortedS = new String(sArr);
-        String sortedT = new String(tArr);
+        for (int n : alphabet) {
+            if (n != 0) {
+                return false;
+            }
+        }
 
-        return sortedS.equals(sortedT);        
+
+        return true;
+       
     }
 }
